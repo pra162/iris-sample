@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Map harness smoke checks</title>
+    <style>
+      body { max-width: 900px; margin: 30px auto; padding: 0 18px; font: 16px/1.5 system-ui, sans-serif; color: #1f2937; }
+      h1 { font-size: 1.5rem; }
+      #results { padding: 16px; border: 1px solid #d1d5db; border-radius: 8px; white-space: pre-wrap; font-family: ui-monospace, monospace; }
+      [data-result="pass"] { color: #166534; }
+      [data-result="fail"] { color: #991b1b; }
+      .test-mount { position: fixed; left: -10000px; top: 0; width: 800px; height: 450px; }
+    </style>
+  </head>
+  <body>
+    <h1>Automated map browser smoke checks</h1>
+    <p>Runs the deterministic first-load race reproduction, checks initial style and layer controls, simulates tile failure and fallback recovery, and measures three first-style loads.</p>
+    <pre id="results" role="status" aria-live="polite">Running checks…</pre>
+    <div id="mounts"></div>
+    <template id="map-template">
+      <div class="map-viewport" data-state="loading" data-style-visible="false">
+        <div class="map-status" role="status">
+          <span class="map-status-label"></span>
+          <button id="retry-map" type="button" hidden>Retry map</button>
+        </div>
+        <svg class="map-style" viewBox="0 0 1000 600"><rect width="1000" height="600" fill="#e7eddf"></rect></svg>
+        <div id="fixture-layer"></div>
+        <div class="map-legend" aria-label="Map legend">BESS sample · Peatland sample</div>
+        <div class="attribution">Local mock basemap · synthetic sample fixtures</div>
+      </div>
+      <label><input id="toggle-bess" type="checkbox" checked> BESS</label>
+      <label><input id="toggle-peatland" type="checkbox" checked> Peatland</label>
+    </template>
+    <table><tbody id="source-rows"></tbody></table>
+    <script src="fixtures.js"></script>
+    <script src="harness.js"></script>
+    <script src="smoke.js"></script>
+  </body>
+</html>

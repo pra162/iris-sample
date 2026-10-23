@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Basemap initialization harness</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        color: #1f2937;
+        background: #f3f5f7;
+      }
+
+      body { margin: 0; }
+      main { max-width: 1120px; margin: 0 auto; padding: 28px; }
+      h1 { margin: 0 0 8px; font-size: 1.6rem; }
+      p { line-height: 1.5; }
+      .subtle { color: #596579; }
+      .map-card, .details {
+        background: white;
+        border: 1px solid #d6dce5;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 18px;
+        border-bottom: 1px solid #e3e7ed;
+      }
+      .toolbar strong { font-size: 1rem; }
+      .controls { display: flex; flex-wrap: wrap; gap: 14px; }
+      label { cursor: pointer; }
+      .map-viewport {
+        position: relative;
+        height: min(62vh, 500px);
+        min-height: 330px;
+        overflow: hidden;
+        background: #d1d5db;
+      }
+      .map-style {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 120ms ease-out;
+      }
+      .map-viewport[data-style-visible="true"] .map-style { opacity: 1; }
+      .map-viewport[data-style-visible="true"] { background: #e7eddf; }
+      .map-status {
+        position: absolute;
+        z-index: 3;
+        top: 12px;
+        left: 12px;
+        max-width: min(460px, calc(100% - 24px));
+        padding: 8px 12px;
+        border-radius: 7px;
+        background: rgb(255 255 255 / 94%);
+        box-shadow: 0 1px 5px rgb(31 41 55 / 20%);
+        font-size: .9rem;
+      }
+      .map-status-label { display: inline; }
+      .retry-button { margin-left: 9px; padding: 5px 9px; font-size: .82rem; }
+      .map-viewport[data-state="error"] .map-status { color: #991b1b; }
+      .map-viewport[data-state="recovering"] .map-status { color: #854d0e; }
+      .map-viewport[data-state="ready"] .map-status,
+      .map-viewport[data-state="fallback"] .map-status { color: #166534; }
+      .map-legend {
+        position: absolute;
+        z-index: 2;
+        right: 12px;
+        bottom: 12px;
+        display: grid;
+        gap: 7px;
+        padding: 10px 12px;
+        border-radius: 7px;
+        background: rgb(255 255 255 / 94%);
+        font-size: .85rem;
+      }
+      .legend-row { display: flex; align-items: center; gap: 8px; }
+      .swatch { width: 13px; height: 13px; border: 1px solid #374151; }
+      .swatch.bess { border-radius: 50%; background: #d97706; }
+      .swatch.peat { background: #14806a; }
+      .fixture { position: absolute; z-index: 1; }
+      .fixture.bess {
+        width: 18px;
+        height: 18px;
+        border: 2px solid white;
+        border-radius: 50%;
+        background: #d97706;
+        box-shadow: 0 1px 4px #374151;
+      }
+      .fixture.peatland {
+        width: 100px;
+        height: 58px;
+        border: 2px solid #08745e;
+        border-radius: 48% 34% 52% 40%;
+        background: rgb(20 128 106 / 45%);
+        transform: rotate(-15deg);
+      }
+      .attribution {
+        position: absolute;
+        z-index: 2;
+        right: 0;
+        bottom: 0;
+        padding: 3px 7px;
+        background: rgb(255 255 255 / 88%);
+        color: #374151;
+        font-size: .7rem;
+      }
+      .details { margin-top: 18px; padding: 16px 18px; }
+      .details h2 { margin: 0 0 10px; font-size: 1.1rem; }
+      table { width: 100%; border-collapse: collapse; text-align: left; }
+      th, td { padding: 8px; border-bottom: 1px solid #e5e7eb; }
+      .scope-note { margin-top: 14px; font-size: .85rem; }
+      .actions { margin-top: 16px; }
+      button {
+        border: 0;
+        border-radius: 7px;
+        padding: 10px 14px;
+        color: white;
+        background: #1d4ed8;
+        font: inherit;
+        cursor: pointer;
+      }
+      button:focus-visible, input:focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
+      @media (max-width: 640px) {
+        main { padding: 16px; }
+        .map-viewport { min-height: 290px; height: 55vh; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Basemap first-load harness</h1>
+      <p class="subtle">Deterministic local map-style and tile mocks; no database, credentials, or external tile service.</p>
+      <section class="map-card" aria-label="Map demonstration">
+        <div class="toolbar">
+          <strong>Sample BESS and peatland fixtures</strong>
+          <div class="controls">
+            <label><input id="toggle-bess" type="checkbox" checked> BESS</label>
+            <label><input id="toggle-peatland" type="checkbox" checked> Peatland</label>
+          </div>
+        </div>
+        <div id="map" class="map-viewport" data-state="loading" data-style-visible="false">
+          <div class="map-status" role="status" aria-live="polite">
+            <span class="map-status-label">Loading map style…</span>
+            <button id="retry-map" class="retry-button" type="button" hidden>Retry map</button>
+          </div>
+          <svg class="map-style" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" aria-label="Mock basemap">
+            <rect width="1000" height="600" fill="#e7eddf"/>
+            <path d="M-30 90 C120 170 140 10 280 90 S470 180 590 75 820 5 1040 120" fill="none" stroke="#d3dfc7" stroke-width="65"/>
+            <path d="M-25 470 C130 410 180 545 330 455 S530 345 680 430 870 505 1040 405" fill="none" stroke="#d3dfc7" stroke-width="85"/>
+            <path d="M80 -30 C220 80 210 180 340 230 S450 390 580 360 780 430 930 640" fill="none" stroke="#acd4df" stroke-width="12"/>
+            <path d="M0 325 C140 285 215 330 340 300 S560 250 700 295 890 350 1020 280" fill="none" stroke="#fff" stroke-width="16"/>
+            <path d="M0 325 C140 285 215 330 340 300 S560 250 700 295 890 350 1020 280" fill="none" stroke="#f3c96c" stroke-width="3"/>
+            <path d="M120 -10 L260 155 340 260 450 320 570 430 690 610" fill="none" stroke="#fff" stroke-width="10"/>
+            <path d="M120 -10 L260 155 340 260 450 320 570 430 690 610" fill="none" stroke="#f3c96c" stroke-width="2"/>
+            <g fill="#465e4c" font-family="sans-serif" font-size="18">
+              <text x="170" y="240">Sample region</text>
+              <text x="690" y="185">Local style fixture</text>
+              <text x="475" y="515">Not a coverage map</text>
+            </g>
+          </svg>
+          <div id="fixture-layer" aria-label="Sample map data"></div>
+          <div class="map-legend" aria-label="Map legend">
+            <div class="legend-row"><span class="swatch bess"></span> BESS sample</div>
+            <div class="legend-row"><span class="swatch peat"></span> Peatland sample</div>
+          </div>
+          <div class="attribution">Local mock basemap · synthetic sample fixtures</div>
+        </div>
+      </section>
+      <section class="details" aria-labelledby="source-heading">
+        <h2 id="source-heading">Fixture sources</h2>
+        <table>
+          <thead><tr><th>Layer</th><th>Attribution</th><th>Source date</th></tr></thead>
+          <tbody id="source-rows"></tbody>
+        </table>
+        <p class="scope-note">The BESS and peatland features are synthetic examples for testing controls and rendering only. They do not assert national map coverage.</p>
+      </section>
+      <p class="actions"><a href="smoke.html">Run automated browser smoke and first-load checks</a></p>
+    </main>
+    <script src="fixtures.js"></script>
+    <script src="harness.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

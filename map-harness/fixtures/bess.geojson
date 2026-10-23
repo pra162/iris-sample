@@ -1,0 +1,32 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "layer": "BESS",
+    "attribution": "Synthetic fixture authored for this harness; no external data",
+    "sourceDate": "2026-10-23",
+    "license": "CC0-1.0; synthetic test data",
+    "geometryNote": "Display-only schematic markers; no geographic coordinates"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": null,
+      "properties": {
+        "id": "bess-demo-1",
+        "type": "bess",
+        "name": "Synthetic BESS sample 1",
+        "displayPosition": { "left": "31%", "top": "40%" }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": null,
+      "properties": {
+        "id": "bess-demo-2",
+        "type": "bess",
+        "name": "Synthetic BESS sample 2",
+        "displayPosition": { "left": "62%", "top": "63%" }
+      }
+    }
+  ]
+}

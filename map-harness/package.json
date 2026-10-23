@@ -1,0 +1,13 @@
+{
+  "name": "iris-map-first-load-harness",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Standalone deterministic basemap first-load and fixture-layer browser tests",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --headed"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  }
+}

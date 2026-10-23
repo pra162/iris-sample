@@ -1,0 +1,22 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "layer": "Peatland",
+    "attribution": "Synthetic fixture authored for this harness; no external data",
+    "sourceDate": "2026-10-23",
+    "license": "CC0-1.0; synthetic test data",
+    "geometryNote": "Display-only schematic marker; no geographic coordinates"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": null,
+      "properties": {
+        "id": "peatland-demo-1",
+        "type": "peatland",
+        "name": "Synthetic peatland sample 1",
+        "displayPosition": { "left": "49%", "top": "29%" }
+      }
+    }
+  ]
+}
