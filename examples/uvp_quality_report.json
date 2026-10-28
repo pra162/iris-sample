@@ -1,0 +1,23 @@
+{
+  "retrieved_at": "2026-10-28",
+  "mode": "dry-run",
+  "source": "UVP-Verbund",
+  "source_url": "https://www.uvp-verbund.de",
+  "pages_fetched": 5,
+  "procedures_found": 36,
+  "source_procedures_filtered_out": 9,
+  "staging_rows_upserted": 0,
+  "records_by_signal_type": {
+    "DATA_CENTER": 10,
+    "SUBSTATION": 11,
+    "BESS": 8
+  },
+  "geometry_bbox_centroids": 29,
+  "geometry_unresolved": 0,
+  "records_missing_description": 0,
+  "records_missing_source_date": 0,
+  "records_with_invalid_coordinates": 0,
+  "empty_queries": [],
+  "issues": [],
+  "note": "One bounded live dry-run (one search page per term); results are time-sensitive and not a coverage claim."
+}

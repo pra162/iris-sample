@@ -1,0 +1,89 @@
+{
+  "source": "UVP-Verbund",
+  "retrieved_at": "2026-10-28",
+  "source_url": "https://www.uvp-verbund.de/trefferanzeige?docuuid=c61afee1-9390-499e-9ee2-8dad2e9a1636",
+  "records": [
+    {
+      "source_name": "uvp_verbund",
+      "source_id": "c61afee1-9390-499e-9ee2-8dad2e9a1636",
+      "signal_type": "BESS",
+      "title": "Batteriespeicher mit Umspannwerk Gemarkung Rohne",
+      "publication_date": null,
+      "source_updated_at": "2026-02-16",
+      "source_result_date": "2026-02-16",
+      "source_url": "https://www.uvp-verbund.de/trefferanzeige?docuuid=c61afee1-9390-499e-9ee2-8dad2e9a1636",
+      "location_text": "Die SZ Solarpark Schleife GmbH beantragte die Genehmigung für die Umwandlung einer Waldfläche in der Größe von 20.187 m² zur Errichtung eines Batteriespeichers mit Umspannwerk auf Teilen der Flurstücke 1/18 und 1/19, Flur 6 der Gemarkung Rohne in der Gemeinde Schleife.",
+      "source_bbox_wgs84": {
+        "west": 14.462320804595947,
+        "south": 51.55123208014564,
+        "east": 14.465711116790773,
+        "north": 51.552766464066586
+      },
+      "geometry_epsg_25832": {
+        "type": "Point",
+        "coordinates": [878710.118, 5725373.733]
+      },
+      "quality_flags": ["geometry_from_source_bbox_centroid"],
+      "raw_payload": {
+        "category": "Forstliche und landwirtschaftliche Vorhaben",
+        "description": "Die SZ Solarpark Schleife GmbH beantragte die Genehmigung für die Umwandlung einer Waldfläche in der Größe von 20.187 m² zur Errichtung eines Batteriespeichers mit Umspannwerk auf Teilen der Flurstücke 1/18 und 1/19, Flur 6 der Gemarkung Rohne in der Gemeinde Schleife.",
+        "location_text_basis": "procedure description",
+        "search_queries": ["Batteriespeicher", "Umspannwerk"],
+        "procedure_dates": [
+          {"label": "Datum der Entscheidung", "date_text": "16.02.2026"}
+        ],
+        "source_updated_at": "2026-02-16",
+        "source_result_date": "2026-02-16",
+        "publication_date": null,
+        "source_bbox": {
+          "west": 14.462320804595947,
+          "south": 51.55123208014564,
+          "east": 14.465711116790773,
+          "north": 51.552766464066586
+        }
+      },
+      "note": "Centroid of the source map bounding box; representative point, not a surveyed project coordinate."
+    },
+    {
+      "source_name": "uvp_verbund",
+      "source_id": "c61afee1-9390-499e-9ee2-8dad2e9a1636",
+      "signal_type": "SUBSTATION",
+      "title": "Batteriespeicher mit Umspannwerk Gemarkung Rohne",
+      "publication_date": null,
+      "source_updated_at": "2026-02-16",
+      "source_result_date": "2026-02-16",
+      "source_url": "https://www.uvp-verbund.de/trefferanzeige?docuuid=c61afee1-9390-499e-9ee2-8dad2e9a1636",
+      "location_text": "Die SZ Solarpark Schleife GmbH beantragte die Genehmigung für die Umwandlung einer Waldfläche in der Größe von 20.187 m² zur Errichtung eines Batteriespeichers mit Umspannwerk auf Teilen der Flurstücke 1/18 und 1/19, Flur 6 der Gemarkung Rohne in der Gemeinde Schleife.",
+      "source_bbox_wgs84": {
+        "west": 14.462320804595947,
+        "south": 51.55123208014564,
+        "east": 14.465711116790773,
+        "north": 51.552766464066586
+      },
+      "geometry_epsg_25832": {
+        "type": "Point",
+        "coordinates": [878710.118, 5725373.733]
+      },
+      "quality_flags": ["geometry_from_source_bbox_centroid"],
+      "raw_payload": {
+        "category": "Forstliche und landwirtschaftliche Vorhaben",
+        "description": "Die SZ Solarpark Schleife GmbH beantragte die Genehmigung für die Umwandlung einer Waldfläche in der Größe von 20.187 m² zur Errichtung eines Batteriespeichers mit Umspannwerk auf Teilen der Flurstücke 1/18 und 1/19, Flur 6 der Gemarkung Rohne in der Gemeinde Schleife.",
+        "location_text_basis": "procedure description",
+        "search_queries": ["Batteriespeicher", "Umspannwerk"],
+        "procedure_dates": [
+          {"label": "Datum der Entscheidung", "date_text": "16.02.2026"}
+        ],
+        "source_updated_at": "2026-02-16",
+        "source_result_date": "2026-02-16",
+        "publication_date": null,
+        "source_bbox": {
+          "west": 14.462320804595947,
+          "south": 51.55123208014564,
+          "east": 14.465711116790773,
+          "north": 51.552766464066586
+        }
+      },
+      "note": "Centroid of the source map bounding box; representative point, not a surveyed project coordinate."
+    }
+  ]
+}
